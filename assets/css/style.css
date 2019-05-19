@@ -1,0 +1,22 @@
+body{
+    background-image: url("../images/faceless-women.jpg");
+}
+
+.mainBox{
+    background-color:#c99a83;
+    opacity: 0.9;
+    font-family: 'Poiret One', cursive;
+    text-align:center;
+    position: relative;
+    top: 50px;
+    height: 600px;
+    color:black;
+}
+
+.title{
+    font-size: 50px;
+}
+
+.description{
+    font-size: 20px;
+}
