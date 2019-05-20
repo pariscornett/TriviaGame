@@ -1,27 +1,45 @@
 //global  variables go here
-    //time left
-    //correct answers
-    //incorrect answers
-    //unanswered questions/timeout
-    //game complete yes or no
+var timeLeft
+var correctAnswers
+var incorrectAnswers
+var timeoutQuestions
+var gameComplete = false;
 
-    
-//make start button
+//hide Q&A boxes, show box used for start button 
+$(".box2, .box3, .box4, .questionBox").hide();
+$(".box1").html("Let's Do This");
+
 
 //make an object containing  var questionOne... var questionFive and a questionOneAnswers ["array"]
+var questions = [
+    {
+        question: "Marsha Rhea Williams was the first black woman in the United States to earn a Ph.D in Computer Science. Where did she earn her degree?",
+        options: ["MIT", "Stanford", "Vanderbilt", "Howard"],
+        answer: this.options[2],
+    },
+    {
+        question: "Who is considered the first computer programmer?",
+        options: ["Katherine Johnson", "Ada Lovelace", "Radia Perlman", "Dorothy Vaughan"],
+        answer: this.options[1],
+    },
+    {
+        question: "Rear Admiral Grace Hopper is lauded for this contribution to computing...",
+        options: ["FORTRAN", "compilers", "COBOL", "all of the above"],
+        answer: this.options[3],
+    },
+]
+
 
 //create a function to select a question and answer (put "ingredients" here to shuffle through the aforementioned object) MAKE SURE TO PUT ALL OPTIONS INSIDE THIS FUNCTION IN DESIRED ORDER OF APPEARANCE
-    //(VANILLA JS) call questionOne...Five
 
-    //(VANILLA JS) call corresponding questionOneAnswers...FiveAnswers
 
-    //(VANILLA JS) start a timer for 30 seconds to answer the question
+//make start button
+// var startButton = document.createElement("button");
+// button.innerHTML = "Let's Do This";
+//append start button
 
-    //(JQUERY) display questionOne...Five in DOM
 
-    //(JQUERY) display corresponding questionOneAnswers...FiveAnswers in DOM 
 
-    //(JQUERY) display a timer that counts down the remaining time...try looking at %
 
 //create a function that handles scenarios of the timer runnning out and the user selecting an answer before the timer runs out (think about whether we use VANILLA JS or JQUERY)
 
