@@ -14,7 +14,9 @@ document.getElementById("start")
 $(".start").click(function(){
     $(" .box1, .box2, .box3, .box4, .questionBox").show();
     $(".start").empty();
+    loadQuestions();
 })
+
 
 //make an object containing  var questionOne... var questionFive and a questionOneAnswers ["array"]
 var questions = [
@@ -38,7 +40,17 @@ var questions = [
 
 
 //create a function to select a question and answer (put "ingredients" here to shuffle through the aforementioned object) MAKE SURE TO PUT ALL OPTIONS INSIDE THIS FUNCTION IN DESIRED ORDER OF APPEARANCE
-
+function loadQuestions(){
+    var questionOne = questions[0].question;
+    var questionOneAnswers = questions[0].options;
+    var correctAnswer = questionOneAnswers[2];
+    $(".questionBox").html(questionOne);
+    $(".box1").html(questionOneAnswers[0]);
+    $(".box2").html(questionOneAnswers[1]);
+    $(".box3").html(questionOneAnswers[2]);
+    $(".box4").html(questionOneAnswers[3]);
+    console.log(correctAnswer);
+}
 
 //make start button
 // var startButton = document.createElement("button");
