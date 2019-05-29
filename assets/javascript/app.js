@@ -5,8 +5,19 @@ var correctAnswers = 0;
 var incorrectAnswers = 0;
 var timedOut = 0;
 var gameComplete = false;
-var timer = 30;
+
 //make an object containing  var questionOne... var questionFive and a questionOneAnswers ["array"]
+var game = {
+    timer:5,
+    countdown: function(){
+        game.timer--;
+        $(".timer").html(game.timer);
+        if (game.timer==0){
+            clearInterval();
+            progress();
+        }
+    }
+}
 var questions = [
     {
         question: "Marsha Rhea Williams was the first black woman in the United States to earn a Ph.D in Computer Science. Where did she earn her degree?",
@@ -33,9 +44,9 @@ $(".start").html("Let's Do This");
 //create a function to select a question and answer (put "ingredients" here to shuffle through the aforementioned object) MAKE SURE TO PUT ALL OPTIONS INSIDE THIS FUNCTION IN DESIRED ORDER OF APPEARANCE
 function loadQuestions(){  
     //set timer to 30 seconds
-    var timer = setInterval(progress(),1000 * 30);
+    var timer = setInterval(game.countdown,1000);
     //showe timer in DOM 
-    $(".timer").html("Time Left: " + timer);
+    $(".timer").html(timer);
     //create variable for the question
     var questionOne = questions[0].question;
     //create variable for the list of possible answers
@@ -64,8 +75,13 @@ $(".start").click(function(){
 
 //make a function that shows how well the player is doing after each question 
 function progress(){
+    //grade the answer
+    //reset the timer
+    clearInterval(game.timer);
     //empty existing boxes
     $(".questionBox, .box1, .box2, .box3, .box4").empty();
+    //hide existing boxes
+    $(".box1, .box2, .box3, .box4, .questionBox").hide();
     //show correct, incorrect and timed out answers in DOM
     $(".correct").html ("You've answered " + correctAnswers + "correctly");
     $(".incorrect").html ("You've answered " + incorrectAnswers + "incorrectly");
@@ -73,12 +89,12 @@ function progress(){
 }
 
 //call to the previous function when timer has run out--use clearTimeout when the user clicks an answer to go ahead and trigger the function and show progress
-function grade () {
-    if (timer == 0){
-        timedOut++;
-        progress();
-    }
-}
+// function grade () {
+//     if (timer == 0){
+//         timedOut++;
+//         progress();
+//     }
+// }
 
 
 
