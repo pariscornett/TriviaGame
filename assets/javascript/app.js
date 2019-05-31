@@ -5,6 +5,7 @@ var incorrectAnswers = 0;
 var timedOut = 0;
 var gameComplete = false;
 var timer = 5;
+var selectedAnswer;
 
 //create objects for questions and answers
 var questions = [
@@ -14,50 +15,62 @@ var questions = [
             a:"MIT",
             b: "Stanford", 
             c:"Vanderbilt", 
-            d: "Howard"
+            d: "Howard",
         },
     },
     {
         question: "Who is considered the first computer programmer?",
-        options: ["Katherine Johnson", "Ada Lovelace", "Radia Perlman", "Dorothy Vaughan"], 
+        options: {
+            a:"Katherine Johnson",
+            b:"Ada Lovelace",
+            c:"Radia Perlman",
+            d:"Dorothy Vaughan",
+        }, 
     },
     {
         question: "Rear Admiral Grace Hopper is lauded for this contribution to computing...",
-        options: ["FORTRAN", "compilers", "COBOL", "all of the above"],
+        options: {
+            a:"FORTRAN",
+            b:"compilers",
+            c:"COBOL",
+            d:"all of the above",
+        },
     },
 ]
 
 //create a timer
 function countDown() {
     //show timer in DOM 
-    $(".timer").html(timer);
+    $(".timer").html("You have " + timer + " seconds remaining");
     //telling timer to decrease by 1 until it reaches 0, then clear out and run function progress.
     if (timer == 0){
         clearInterval(timer);
         progress();
     } else {
         timer--;
-        //console.log(timer);
     }
 }
-
-
-
-
 
 //hide Q&A boxes, show box used for start button 
 $(".box2, .box3, .box4, .questionBox").hide();
 $(".start").html("Let's Do This");
 
+
+//create a function that stores the value of the click in the variable selectedAnswer
+function storeAnswer(value){
+    $(".box1, .box2, .box3, .box4").click(function(){
+        selectedAnswer = this.value;
+        console.log(selectedAnswer);
+    })
+}
+
 //create a function to select a question and answer (put "ingredients" here to shuffle through the aforementioned object) MAKE SURE TO PUT ALL OPTIONS INSIDE THIS FUNCTION IN DESIRED ORDER OF APPEARANCE
 function loadQuestions(){  
-   
-    //set timer to 30 seconds
+    //call timer function and set it to decrease by 1 second
     countDown();
     var timer = setInterval(function() {
         countDown();
     }, 1000);
-
     //create variable for the question
     var questionOne = questions[0].question;
     //create variable for the list of possible answers
@@ -71,10 +84,14 @@ function loadQuestions(){
     $(".box2").html(questionOneAnswers.b);
     $(".box3").html(questionOneAnswers.c);
     $(".box4").html(questionOneAnswers.d);
+    //make all answer boxes clickable and store their values
+    $(".box 1, .box2, .box3, .box4").click(storeAnswer(this.value))
+    storeAnswer();
 }
 
-//make start button clickable
 
+
+//make start button clickable
 $(".start").click(function(){
     //show the other boxes we need for remainder of game
     $(" .box1, .box2, .box3, .box4, .questionBox").show();
@@ -93,6 +110,7 @@ function progress(){
     //hide existing boxes
     $(".box1, .box2, .box3, .box4, .questionBox").hide();
     //show correct, incorrect and timed out answers in DOM
+    $(".correct, .incorrect, .time-out").show();
     $(".correct").html ("You've answered " + correctAnswers + "correctly");
     $(".incorrect").html ("You've answered " + incorrectAnswers + "incorrectly");
     $(".time-out").html ("You've let " + timedOut + " questions time out");  
