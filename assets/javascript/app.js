@@ -1,4 +1,3 @@
-
 //global  variables go here
 var timeLeft
 var correctAnswers = 0;
@@ -7,10 +6,7 @@ var timedOut = 0;
 var gameComplete = false;
 var timer = 5;
 
-
-
-
-
+//create objects for questions and answers
 var questions = [
     {
         question: "Marsha Rhea Williams was the first black woman in the United States to earn a Ph.D in Computer Science. Where did she earn her degree?",
@@ -31,17 +27,18 @@ var questions = [
     },
 ]
 
-//creating a timer
+//create a timer
 function countDown() {
+    //show timer in DOM 
+    $(".timer").html(timer);
+    //telling timer to decrease by 1 until it reaches 0, then clear out and run function progress.
     if (timer == 0){
         clearInterval(timer);
         progress();
     } else {
         timer--;
-        console.log(timer);
+        //console.log(timer);
     }
-
-
 }
 
 
@@ -60,10 +57,7 @@ function loadQuestions(){
     var timer = setInterval(function() {
         countDown();
     }, 1000);
-    //show timer in DOM 
-    $(".timer").html("Time left: "  + timer);
 
-    
     //create variable for the question
     var questionOne = questions[0].question;
     //create variable for the list of possible answers
